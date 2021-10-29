@@ -1,0 +1,35 @@
+specVersion: 0.2.0
+name: moonbeam-dictionary
+version: 1.0.0
+description: ''
+repository: ''
+schema:
+  file: ./schema.graphql
+network:
+  genesisHash: '0x91bc6e169807aaa54802737e1c504b2577d4fafedd5a02c10293b1cd60e39527' # Moonriver
+  endpoint: wss://moonbeam-alpha.api.onfinality.io/public-ws
+  chaintypes:
+    file: "./moonbase.json"
+
+dataSources:
+  - kind: substrate/Runtime
+    startBlock: 1053413
+    mapping:
+      file: ./dist/index.js
+      handlers:
+        - handler: handleBlock
+          kind: substrate/BlockHandler
+        - handler: handleEvent
+          kind: substrate/EventHandler
+        - handler: handleCall
+          kind: substrate/CallHandler
+
+  - kind: substrate/Moonbeam
+    startBlock: 1053413
+    processor:
+      file: './node_modules/@subql/contract-processors/dist/moonbeam.js'
+    mapping:
+      file: ./dist/index.js
+      handlers:
+        - handler: handleEvmTransaction
+          kind: substrate/MoonbeamCall
