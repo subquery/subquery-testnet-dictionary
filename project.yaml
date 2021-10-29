@@ -13,7 +13,7 @@ network:
 
 dataSources:
   - kind: substrate/Runtime
-    startBlock: 1053413
+    startBlock: 1
     mapping:
       file: ./dist/index.js
       handlers:
@@ -25,7 +25,7 @@ dataSources:
           kind: substrate/CallHandler
 
   - kind: substrate/Moonbeam
-    startBlock: 1053413
+    startBlock: 1
     processor:
       file: './node_modules/@subql/contract-processors/dist/moonbeam.js'
     mapping:
