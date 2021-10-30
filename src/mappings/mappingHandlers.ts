@@ -56,6 +56,9 @@ async function handleEvmEvent(event: SubstrateEvent): Promise<void> {
 }
 
 export async function handleEvmTransaction(tx: MoonbeamCall): Promise<void> {
+    if (!tx.hash) {
+        return;
+    }
     const transaction = EvmTransaction.create({
         id: tx.hash,
         from: tx.from,
