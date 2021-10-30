@@ -68,7 +68,7 @@ export async function handleEvmTransaction(tx: MoonbeamCall): Promise<void> {
         data: tx.data,
         value: BigInt(tx.value.toString()),
         blockHeight: BigInt(tx.blockNumber.toString()),
-        timestamp: new Date(tx.timestamp),
+        timestamp: new Date(tx.timestamp * 1000),
         success: tx.success,
     });
     await transaction.save();
