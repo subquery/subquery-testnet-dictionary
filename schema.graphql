@@ -39,9 +39,9 @@ type EvmTransaction @entity {
 
   id: ID!
 
-  from: Bytes! @index
+  from: String! @index
 
-  to: Bytes! @index
+  to: String! @index
 
   blockHeight: BigInt! @index
 
@@ -53,16 +53,16 @@ type EvmLog @entity {
 
   id: ID!
 
-  address: Bytes! @index
+  address: String! @index
 
   blockHeight: BigInt! @index
 
-  topics0: Bytes!
+  topics0: String!
 
-  topics1: Bytes
+  topics1: String
 
-  topics2: Bytes
+  topics2: String
 
-  topics3: Bytes
+  topics3: String
 
 }
