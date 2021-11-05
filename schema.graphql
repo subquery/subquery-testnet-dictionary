@@ -39,23 +39,11 @@ type EvmTransaction @entity {
 
   id: ID!
 
-  from: String! @index
+  from: Bytes! @index
 
-  to: String! @index
-
-  gasLimit: BigInt!
-
-  gasPrice: BigInt!
-
-  data: Bytes!
-
-  value: BigInt!
-
-  signature: Bytes
+  to: Bytes! @index
 
   blockHeight: BigInt! @index
-
-  timestamp: Date!
 
   success: Boolean!
 
@@ -65,9 +53,7 @@ type EvmLog @entity {
 
   id: ID!
 
-  address: String! @index
-
-  data: Bytes!
+  address: Bytes! @index
 
   blockHeight: BigInt! @index
 

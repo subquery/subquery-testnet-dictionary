@@ -45,7 +45,6 @@ async function handleEvmEvent(event: SubstrateEvent): Promise<void> {
     const log = EvmLogModel.create({
         id: `${event.block.block.header.number.toString()}-${event.idx}`,
         address: address.toString(),
-        data: data.toHex(),
         blockHeight: event.block.block.header.number.toBigInt(),
         topics0: topics[0].toHex(),
         topics1: topics[1]?.toHex(),
@@ -63,12 +62,7 @@ export async function handleEvmTransaction(tx: MoonbeamCall): Promise<void> {
         id: tx.hash,
         from: tx.from,
         to: tx.to,
-        gasLimit: BigInt(tx.gasLimit.toString()),
-        gasPrice: BigInt(tx.gasPrice.toString()),
-        data: tx.data,
-        value: BigInt(tx.value.toString()),
         blockHeight: BigInt(tx.blockNumber.toString()),
-        timestamp: new Date(tx.timestamp * 1000),
         success: tx.success,
     });
     await transaction.save();
