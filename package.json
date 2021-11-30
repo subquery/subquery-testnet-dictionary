@@ -19,7 +19,7 @@
   "author": "Ian He",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@polkadot/api": "^6",
+    "@polkadot/api": "6.9.2",
     "@subql/cli": "^0.16.1",
     "@subql/contract-processors": "0.3.2",
     "@subql/types": "^0.10.0",
