@@ -43,6 +43,8 @@ type EvmTransaction @entity {
 
   to: String! @index
 
+  func: String @index
+
   blockHeight: BigInt! @index
 
   success: Boolean!

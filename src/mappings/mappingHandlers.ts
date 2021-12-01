@@ -2,6 +2,7 @@ import {EvmLog} from "@polkadot/types/interfaces"
 import {SubstrateExtrinsic,SubstrateEvent,SubstrateBlock} from "@subql/types";
 import { SpecVersion, Event, Extrinsic, EvmLog as EvmLogModel, EvmTransaction } from "../types";
 import { MoonbeamCall } from "@subql/contract-processors/dist/moonbeam";
+import { inputToFunctionSighash, isZero } from "../utils";
 
 
 export async function handleBlock(block: SubstrateBlock): Promise<void> {
@@ -58,10 +59,12 @@ export async function handleEvmTransaction(tx: MoonbeamCall): Promise<void> {
     if (!tx.hash) {
         return;
     }
+    const func = isZero(tx.data) ? undefined : inputToFunctionSighash(tx.data);
     const transaction = EvmTransaction.create({
         id: tx.hash,
         from: tx.from,
         to: tx.to,
+        func,
         blockHeight: BigInt(tx.blockNumber.toString()),
         success: tx.success,
     });
