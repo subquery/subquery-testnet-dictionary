@@ -20,9 +20,9 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@polkadot/api": "6.9.2",
-    "@subql/cli": "^0.16.1",
+    "@subql/cli": "latest",
     "@subql/contract-processors": "0.3.2",
-    "@subql/types": "^0.10.0",
+    "@subql/types": "latest",
     "moonbeam-types-bundle": "^2.0.1",
     "typescript": "^4.4.4"
   }
