@@ -24,7 +24,10 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
         store.bulkCreate('Event', events),
         store.bulkCreate('EvmLog', logs),
         store.bulkCreate('Extrinsic', calls),
-        store.bulkCreate('EvmTransaction', evmCalls.map((call,idx)=>handleEvmTransaction(`${block.block.header.number.toString()}-${idx}`,call))),
+        store.bulkCreate('EvmTransaction', evmCalls
+            .map((call,idx)=>handleEvmTransaction(`${block.block.header.number.toString()}-${idx}`,call))
+            .filter(tx=>tx)
+        ),
     ]);
 }
 
