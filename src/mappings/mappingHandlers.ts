@@ -1,9 +1,8 @@
 import {EventRecord, EvmLog} from "@polkadot/types/interfaces"
-import {SubstrateExtrinsic,SubstrateEvent,SubstrateBlock} from "@subql/types";
+import {SubstrateExtrinsic,SubstrateBlock} from "@subql/types";
 import { SpecVersion, Event, Extrinsic, EvmLog as EvmLogModel, EvmTransaction } from "../types";
 import MoonbeamDatasourcePlugin, { MoonbeamCall } from "@subql/contract-processors/dist/moonbeam";
-import { inputToFunctionSighash, isZero } from "../utils";
-import { wrapExtrinsics } from "./utils";
+import { inputToFunctionSighash, isZero, wrapExtrinsics } from "../utils";
 
 let specVersion: SpecVersion;
 export async function handleBlock(block: SubstrateBlock): Promise<void> {
@@ -20,13 +19,12 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
     const events = eventData.map(([evt])=>evt);
     const logs = eventData.map(([_,log])=>log).filter(log=>log);
     const calls = wrapExtrinsics(block).map((ext,idx)=>handleCall(`${block.block.header.number.toString()}-${idx}`,ext));
-    //baseFilter: [{module: 'ethereum', method: 'transact'}],
     const evmCalls: MoonbeamCall[] = await Promise.all(wrapExtrinsics(block).filter(ext => ext.extrinsic.method.section === 'ethereum' && ext.extrinsic.method.method === 'transact').map( (ext) => MoonbeamDatasourcePlugin.handlerProcessors['substrate/MoonbeamCall'].transformer(ext, {} as any, undefined, undefined))) as any;
     await Promise.all([
-        (store as any).bulkCreate('Event', events),
-        (store as any).bulkCreate('EvmLog', logs),
-        (store as any).bulkCreate('Extrinsic', calls),
-        (store as any).bulkCreate('EvmTransaction', evmCalls.map((call,idx)=>handleEvmTransaction(`${block.block.header.number.toString()}-${idx}`,call))),
+        store.bulkCreate('Event', events),
+        store.bulkCreate('EvmLog', logs),
+        store.bulkCreate('Extrinsic', calls),
+        store.bulkCreate('EvmTransaction', evmCalls.map((call,idx)=>handleEvmTransaction(`${block.block.header.number.toString()}-${idx}`,call))),
     ]);
 }
 
@@ -54,7 +52,7 @@ export function handleCall(idx: string, extrinsic: SubstrateExtrinsic): Extrinsi
 
 function handleEvmEvent(blockNumber: string, eventIdx: number, event: EventRecord): EvmLogModel {
     const [{address, data, topics}] = event.event.data as unknown as [EvmLog];
-    const log = EvmLogModel.create({
+    return EvmLogModel.create({
         id: `${blockNumber}-${eventIdx}`,
         address: address.toString(),
         blockHeight: BigInt(blockNumber),
@@ -63,7 +61,6 @@ function handleEvmEvent(blockNumber: string, eventIdx: number, event: EventRecor
         topics2: topics[2]?.toHex(),
         topics3: topics[3]?.toHex(),
     });
-    return log;
 }
 
 export function handleEvmTransaction(idx: string, tx: MoonbeamCall): EvmTransaction {
@@ -71,7 +68,7 @@ export function handleEvmTransaction(idx: string, tx: MoonbeamCall): EvmTransact
         return;
     }
     const func = isZero(tx.data) ? undefined : inputToFunctionSighash(tx.data);
-    const transaction = EvmTransaction.create({
+    return EvmTransaction.create({
         id: idx,
         txHash: tx.hash,
         from: tx.from,
@@ -80,5 +77,4 @@ export function handleEvmTransaction(idx: string, tx: MoonbeamCall): EvmTransact
         blockHeight: BigInt(tx.blockNumber.toString()),
         success: tx.success,
     });
-    return transaction;
 }
