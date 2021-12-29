@@ -39,6 +39,8 @@ type EvmTransaction @entity {
 
   id: ID!
 
+  txHash: String! @index
+
   from: String! @index
 
   to: String! @index

@@ -26,10 +26,8 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
         (store as any).bulkCreate('Event', events),
         (store as any).bulkCreate('EvmLog', logs),
         (store as any).bulkCreate('Extrinsic', calls),
-        (store as any).bulkCreate('EvmTransaction', evmCalls.map(handleEvmTransaction)),
+        (store as any).bulkCreate('EvmTransaction', evmCalls.map((call,idx)=>handleEvmTransaction(`${block.block.header.number.toString()}-${idx}`,call))),
     ]);
-
-    // await Promise.all(block.events.map((evt, idx)=>handleEvent(block.block.header.number.toString(), idx, evt)));
 
 }
 
@@ -69,13 +67,14 @@ function handleEvmEvent(blockNumber: string, eventIdx: number, event: EventRecor
     return log;
 }
 
-export function handleEvmTransaction(tx: MoonbeamCall): EvmTransaction {
+export function handleEvmTransaction(idx: string, tx: MoonbeamCall): EvmTransaction {
     if (!tx.hash) {
         return;
     }
     const func = isZero(tx.data) ? undefined : inputToFunctionSighash(tx.data);
     const transaction = EvmTransaction.create({
-        id: tx.hash,
+        id: idx,
+        txHash: tx.hash,
         from: tx.from,
         to: tx.to,
         func,
