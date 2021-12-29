@@ -16,7 +16,7 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
         specVersion.blockHeight = block.block.header.number.toBigInt();
         await specVersion.save();
     }
-    const eventData = block.events.map((evt, idx)=>handleEvent(block.block.header.number.toString(), idx, evt));
+    const eventData = block.events.filter(evt => evt.event.section!=='system' && evt.event.method!=='ExtrinsicSuccess').map((evt, idx)=>handleEvent(block.block.header.number.toString(), idx, evt));
     const events = eventData.map(([evt])=>evt);
     const logs = eventData.map(([_,log])=>log).filter(log=>log);
     const calls = wrapExtrinsics(block).map((ext,idx)=>handleCall(`${block.block.header.number.toString()}-${idx}`,ext));
@@ -28,7 +28,6 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
         (store as any).bulkCreate('Extrinsic', calls),
         (store as any).bulkCreate('EvmTransaction', evmCalls.map((call,idx)=>handleEvmTransaction(`${block.block.header.number.toString()}-${idx}`,call))),
     ]);
-
 }
 
 export function handleEvent(blockNumber: string, eventIdx: number, event: EventRecord): [Event, EvmLogModel] {
