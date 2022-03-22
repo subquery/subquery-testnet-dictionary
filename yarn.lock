@@ -1256,10 +1256,10 @@
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.0.0.tgz#109fb595021de285f05a7db6806f2f48296fcee7"
   integrity sha512-gIVaYhUsy+9s58m/ETjSJVKHhKTBMmcRb9cEV5/5dwvfDlfORjKrFsDeDHWRrm6RjcPvCLZFwGJjAjLj1gg4HA==
 
-"@subql/cli@^0.22.0":
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/@subql/cli/-/cli-0.22.0.tgz#a4eb10e739e9508d0caf659252310fc7d63bbc1e"
-  integrity sha512-VULTgbKACOBiezZmtX6A4oSisRAuUpJ6kMJa/QcNVEdLQGTyEycsYiAJvOrxdHLTwSEGc/jJw9XIVCcYQ7698Q==
+"@subql/cli@^0.23.0":
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/@subql/cli/-/cli-0.23.0.tgz#553afff2768ddcf742c3eabbc71bc8411e298c29"
+  integrity sha512-Z1AxIiCDcwSY3kbKYkIbbEmBgzmaC/uYulNCGl2VXYqMK6rJ9I7PFk6d33bCQ7I0SVVPzZMD/uVQiQ/rENOmwA==
   dependencies:
     "@oclif/command" "^1.8.16"
     "@oclif/config" "^1.18.3"
@@ -1267,7 +1267,7 @@
     "@oclif/plugin-help" "^3.2.3"
     "@subql/common" "0.19.0"
     "@subql/common-substrate" "0.1.0"
-    "@subql/common-terra" "0.1.0"
+    "@subql/common-terra" "0.1.1"
     "@subql/validator" "0.4.6-0"
     "@types/ejs" "^3.1.0"
     "@types/inquirer" "^8.2.0"
@@ -1325,12 +1325,12 @@
     reflect-metadata "^0.1.13"
     sequelize "^6.6.2"
 
-"@subql/common-terra@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@subql/common-terra/-/common-terra-0.1.0.tgz#901ae519cc27ede87e0d6fa6c078a8f2be5e4601"
-  integrity sha512-jstTmrx39xOOQ4TLAjO+5FvwipyTL346KdCS/qXWs1pDdcesfBN3SE2BgdQevQV1h3/uV6ZA4xOCQ9yUAVQj1Q==
+"@subql/common-terra@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@subql/common-terra/-/common-terra-0.1.1.tgz#9d5c718b77c8e9813f1ab6bd155167a5765d9ce2"
+  integrity sha512-refYzFaB7sKGxS1kyKrUHHpovwKXqLgxMfVXGvD5FPou/4a8LXBmIhLU98h3E8otDiokxT6U7AmQw6hcp62TJw==
   dependencies:
-    "@subql/types-terra" "0.1.0"
+    "@subql/types-terra" "0.2.0"
     bn.js "4.11.6"
     class-transformer "0.4.0"
     class-validator "^0.13.1"
@@ -1389,20 +1389,20 @@
     sequelize "^6.15.0"
     tar "^6.1.11"
 
-"@subql/contract-processors@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@subql/contract-processors/-/contract-processors-0.5.3.tgz#af5cb9e3a81dc58236e6c4f15da7be3435cd2706"
-  integrity sha512-3PyS9rs910T0+8VTqCTrUVDUwfbZR3SdofHsPzx8sVqdazElp5EJbM0EGEPH5TBCQE8pbmDYBkmevzQKE6N+7w==
+"@subql/contract-processors@^0.5.4":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@subql/contract-processors/-/contract-processors-0.5.4.tgz#64b6b7b52c27f2ab521f9c9be742ce87f5e7839f"
+  integrity sha512-nT6Om53/Y+5M7a2kDZSsp6el/xiPXfV1kFJBA4yKW9m+yNgXrpaaVrbqWApySQCE3vA37JURjv9bvVsrvW30zA==
   dependencies:
     "@subql/types" "0.14.0"
     class-transformer "0.5.1"
     class-validator "^0.13.2"
     ethers "^5.5.4"
 
-"@subql/types-terra@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@subql/types-terra/-/types-terra-0.1.0.tgz#dadf058c37afe4c0c7b2e4a26ad9edcbdac6e845"
-  integrity sha512-MUiGhmYTm8qTm9z+HUw42Cdz5GTUPA5dESR0+8Xhbm/AZgDD6bbXD2hGBu1WnAd3Lf6jy9uv1tErL28h5pC88Q==
+"@subql/types-terra@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@subql/types-terra/-/types-terra-0.2.0.tgz#27754e18429ffe32230febe7367a1f78bac24f83"
+  integrity sha512-aJVsAoUM6qwvPYH+c+eyQafcTNGqbNaO3PB4+TQOZShuLz5y71mIIg3pqJs5Q0SvEMN5KMockgvlyETUgLIlNg==
 
 "@subql/types@0.14.0", "@subql/types@^0.14.0":
   version "0.14.0"
