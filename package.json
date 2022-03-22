@@ -4,6 +4,7 @@
   "description": "subquery diction for moonbase-alpha and moonriver",
   "main": "dist/index.js",
   "scripts": {
+    "run": "subql-node",
     "build": "rm -rf dist && tsc -b",
     "prepack": "rm -rf dist && npm build",
     "test": "jest",
@@ -28,8 +29,8 @@
   },
   "devDependencies": {
     "@polkadot/api": "^7.12.1",
-    "@subql/cli": "^0.22.0",
-    "@subql/contract-processors": "^0.5.3",
+    "@subql/cli": "^0.23.0",
+    "@subql/contract-processors": "^0.5.4",
     "@subql/types": "^0.14.0",
     "typescript": "^4.6.2"
   }
