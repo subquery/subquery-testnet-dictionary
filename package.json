@@ -1,7 +1,7 @@
 {
-  "name": "moonbeam-dictionary",
+  "name": "subquery-testnet-dictionary",
   "version": "0.1.0",
-  "description": "subquery diction for moonbase-alpha and moonriver",
+  "description": "A dictionary for SubQuery testnet",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc -b",
@@ -9,28 +9,25 @@
     "test": "jest",
     "codegen": "subql codegen"
   },
-  "homepage": "https://github.com/subquery/moonbeam-dictionary",
-  "repository": "github:subquery/moonbeam-dictionary",
+  "homepage": "https://github.com/subquery/subquery-testnet-dictionary",
+  "repository": "github:subquery/subquery-testnet-dictionary",
   "files": [
     "dist",
     "schema.graphql",
     "project.yaml"
   ],
-  "author": "Ian He",
+  "author": "SubQuery network",
   "license": "Apache-2.0",
   "resolutions": {
     "@polkadot/api": "^7.12.1",
     "@polkadot/types": "^7.12.1",
     "@polkadot/util": "^8.5.1"
   },
-  "dependencies": {
-    "moonbeam-types-bundle": "^2.0.3"
-  },
   "devDependencies": {
     "@polkadot/api": "^7.12.1",
-    "@subql/cli": "^0.23.0",
-    "@subql/contract-processors": "^0.5.4",
-    "@subql/types": "^0.14.0",
+    "@subql/cli": "latest",
+    "@subql/contract-processors": "latest",
+    "@subql/types": "latest",
     "typescript": "^4.6.2"
   }
 }
